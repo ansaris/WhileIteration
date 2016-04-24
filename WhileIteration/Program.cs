@@ -16,7 +16,7 @@ namespace WhileIteration
                 displayMenu = MainMenu();
             }
         }
-
+        
         private static bool MainMenu()
         {
             Console.Clear();
