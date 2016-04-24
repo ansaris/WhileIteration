@@ -10,36 +10,110 @@ namespace WhileIteration
     {
         static void Main(string[] args)
         {
-            MainMenu();
+            bool displayMenu = true;
+            while (displayMenu)
+            {
+                displayMenu = MainMenu();
+            }
         }
 
-        private static void MainMenu()
+        private static bool MainMenu()
         {
+            Console.Clear();
             Console.WriteLine("Choose an option:");
-            Console.WriteLine("1) Option 1");
-            Console.WriteLine("2) Option 2");
+            Console.WriteLine("1) Print Numbers");
+            Console.WriteLine("2) Guessing Game");
             Console.WriteLine("3) Exit");
             string result = Console.ReadLine();
             if (result == "1")
             {
-                Console.WriteLine("You selected Option 1");
-                Console.ReadKey();
+                PrintNumbers();
+                return true;
             }
             else if (result == "2")
             {
-                Console.WriteLine("You selected Option 2");
-                Console.ReadKey();
+                GuessingGame();
+                return true;
             }
             else if (result == "3")
             {
                 Console.WriteLine("Goodbye.");
-                Console.ReadKey();
+                Console.ReadLine();
+                return false;
             }
             else
             {
                 Console.WriteLine("I didn't understand.");
-                Console.ReadKey();
+                Console.ReadLine();
+                return true;
             }
+        }
+        private static void PrintNumbers()
+        {
+            Console.Clear();
+            Console.WriteLine("Print Numbers!");
+            Console.Write("Type a number: ");
+            int result = int.Parse(Console.ReadLine());
+            int counter = 1;
+            while (counter <= result)
+            {
+                Console.Write(counter);
+                Console.Write("-");
+                counter++;
+            }
+            Console.ReadLine();
+        }
+        private static void GuessingGame()
+        {
+            Console.Clear();
+            Console.WriteLine("Guessing Game!");
+
+            Random myRandom = new Random();
+
+            int randomNumber = myRandom.Next(1, 10);
+
+            int guesses = 0;
+
+            bool incorrect = true;
+
+            do
+            {
+                Console.WriteLine("Guess my number between 1 and 10: ");
+                string guess = Console.ReadLine();
+                if (guess == randomNumber.ToString())
+                    incorrect = false;
+                else
+                    Console.WriteLine("Wrong");
+                guesses++;
+            } while (incorrect);
+            Console.WriteLine("Correct! It only took you {0} guesses", guesses);
+            /*
+            while (guesses < 3)
+            {
+                Console.WriteLine();
+                Console.Write("Guess my number between 1 and 11: ");
+                int guess = int.Parse(Console.ReadLine());
+                if (randomNumber == guess)
+                {
+                    Console.WriteLine("You guessed correctly!");
+                    break;
+                }
+                else if (randomNumber != guess && guesses < 3)
+                {
+                    Console.WriteLine("You have {0} tries left.", 2 - guesses);
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, you lose.");
+                }
+                guesses++;
+            }
+            */
+
+
+
+
+            Console.ReadLine();
         }
     }
 }
